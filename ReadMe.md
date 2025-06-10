@@ -1,83 +1,237 @@
 # Hookinator
 
-Hookinator é um serviço de webhook escrito em OCaml. Ele recebe webhooks, processa transações e envia notificações.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![OCaml](https://img.shields.io/badge/OCaml-5.2+-orange.svg)](https://ocaml.org/)
 
-## Funcionalidades
+Hookinator é um serviço de webhook robusto e eficiente escrito em OCaml. Ele recebe webhooks HTTP, processa transações de forma assíncrona e envia notificações, oferecendo uma solução completa para integração de sistemas via webhooks.
 
-* Recebe e processa webhooks.
-* Armazena transações em um banco de dados SQLite.
-* Envia notificações (a implementação específica de notificação pode variar).
-* Valida os dados recebidos.
+## ✨ Funcionalidades
 
-## Estrutura do Projeto
+- 🔄 **Processamento de Webhooks**: Recebe e processa webhooks HTTP de forma assíncrona
+- 💾 **Persistência de Dados**: Armazena transações em banco de dados SQLite para auditoria
+- 📧 **Sistema de Notificações**: Envia notificações personalizáveis baseadas nos eventos recebidos
+- ✅ **Validação Robusta**: Valida dados de entrada com verificação de integridade
+- 🚀 **Alta Performance**: Construído com Lwt para programação assíncrona eficiente
+- 📊 **Logging Estruturado**: Sistema de logs detalhado para monitoramento e debug
 
-*   **`bin/`**: Contém o executável principal.
-    *   [`main.ml`](bin/main.ml): Ponto de entrada da aplicação.
-*   **`lib/`**: Contém a lógica principal da aplicação.
-    *   [`hookinator.ml`](lib/hookinator.ml): Módulo principal da biblioteca Hookinator.
-    *   [`handlers.ml`](lib/handlers.ml): Lida com as requisições HTTP e webhooks.
-    *   [`database.ml`](lib/database.ml): Interage com o banco de dados SQLite.
-    *   [`transaction.ml`](lib/transaction.ml): Define a estrutura e lógica de transações.
-    *   [`notification.ml`](lib/notification.ml): Lida com o envio de notificações.
-    *   [`validation.ml`](lib/validation.ml): Realiza a validação dos dados.
-    *   [`types.ml`](lib/types.ml): Define os tipos de dados usados no projeto.
-*   **`test/`**: Contém os testes.
-    *   [`test_hookinator.ml`](test/test_hookinator.ml): Testes unitários em OCaml.
-    *   [`test_webhook.py`](test_webhook.py): Script Python para testar o endpoint do webhook.
-*   **`dune-project`**: Arquivo de configuração do Dune para o projeto.
-*   **`hookinator.opam`**: Arquivo de metadados do pacote OPAM.
-*   **`LICENSE`**: Licença do projeto ([MIT](LICENSE)).
-*   **`webhook_transactions.db`**: Arquivo de banco de dados SQLite (gerado em tempo de execução).
+## 🏗️ Arquitetura
 
-## Pré-requisitos
+```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   HTTP Client   │───▶│   Hookinator     │───▶│   Database      │
+│   (Webhook)     │◀———│   Server         │    │   (SQLite)      │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
 
-*   OCaml
-*   Dune
-*   OPAM
-*   Bibliotecas OCaml listadas no arquivo `hookinator.opam` (ex: `opium`, `lwt`, `sqlite3`, `cohttp`, etc.)
-*   Python 3 (para executar o script de teste `test_webhook.py`)
+```
 
-## Construindo o Projeto
+## 📁 Estrutura do Projeto
 
-1.  Instale as dependências do OPAM:
-    ```sh
-    opam install . --deps-only --with-test
-    ```
-2.  Construa o projeto usando Dune:
-    ```sh
-    dune build
-    ```
+```
+hookinator/
+├── bin/                    # Executável principal
+│   ├── dune               # Configuração do executável
+│   └── main.ml            # Ponto de entrada da aplicação
+├── lib/                   # Biblioteca principal
+│   ├── database.ml        # Interface com banco de dados SQLite
+│   ├── dune              # Configuração da biblioteca
+│   ├── handlers.ml       # Manipuladores de requisições HTTP
+│   ├── hookinator.ml     # Módulo principal e API pública
+│   ├── notification.ml   # Sistema de notificações
+│   ├── transaction.ml    # Lógica de transações e modelos
+│   ├── types.ml         # Definições de tipos compartilhados
+│   └── validation.ml     # Validação de dados e schemas
+├── test/                 # Testes
+│   ├── dune             # Configuração de testes
+│   └── test_hookinator.ml # Testes unitários
+├── dune-project         # Configuração do projeto Dune
+├── hookinator.opam      # Metadados do pacote OPAM
+├── test_webhook.py      # Script de teste Python
+├── webhook_transactions.db # Banco de dados SQLite
+└── LICENSE              # Licença MIT
+```
 
-## Executando
+### 📋 Descrição dos Módulos
 
-Para iniciar o servidor Hookinator:
+- **[`bin/main.ml`](bin/main.ml)**: Ponto de entrada que inicializa o servidor HTTP
+- **[`lib/hookinator.ml`](lib/hookinator.ml)**: API principal e orquestração dos componentes
+- **[`lib/handlers.ml`](lib/handlers.ml)**: Manipuladores de rotas HTTP e processamento de webhooks
+- **[`lib/database.ml`](lib/database.ml)**: Camada de abstração para operações com SQLite
+- **[`lib/transaction.ml`](lib/transaction.ml)**: Modelos de dados e lógica de transações
+- **[`lib/notification.ml`](lib/notification.ml)**: Sistema de envio de notificações
+- **[`lib/validation.ml`](lib/validation.ml)**: Validação de payloads e schemas JSON
+- **[`lib/types.ml`](lib/types.ml)**: Tipos de dados compartilhados entre módulos
 
-```sh
+## 🚀 Início Rápido
+
+### Pré-requisitos
+
+- **OCaml** >= 5.2.0
+- **Dune** >= 3.0
+- **OPAM** >= 2.1
+- **Python 3** (para testes)
+
+#### Dependências OCaml
+
+As dependências são gerenciadas pelo arquivo [`hookinator.opam`](hookinator.opam).
+
+### 📦 Instalação
+
+1. **Clone o repositório**:
+   ```bash
+   git clone <repository-url>
+   cd hookinator
+   ```
+
+2. **Configure o ambiente OCaml**:
+   ```bash
+   # Se necessário, crie um switch local
+   opam switch create . 5.2.0
+
+   # Instale as dependências
+   opam install . --deps-only --with-test
+   ```
+
+3. **Compile o projeto**:
+   ```bash
+   dune build
+   ```
+
+### ▶️ Executando
+
+#### Iniciar o Servidor
+
+```bash
+# Executar diretamente
 dune exec hookinator
+
+# Em modo de desenvolvimento (com logs verbosos)
+HOOKINATOR_LOG_LEVEL=debug dune exec hookinator
+
+# Especificar porta customizada
+HOOKINATOR_PORT=8080 dune exec hookinator
 ```
 
-Por padrão, o servidor deve iniciar e escutar por requisições HTTP na porta especificada na configuração (geralmente definida em [`bin/main.ml`](bin/main.ml) ou através de variáveis de ambiente).
+O servidor estará disponível em `http://localhost:3000` (ou na porta especificada).
 
-## Testando
+#### Variáveis de Ambiente
 
-### Testes Unitários (OCaml)
+| Variável | Padrão | Descrição |
+|----------|--------|-----------|
+| `HOOKINATOR_PORT` | `3000` | Porta do servidor HTTP |
+| `HOOKINATOR_DB_PATH` | `webhook_transactions.db` | Caminho do banco SQLite |
+| `HOOKINATOR_LOG_LEVEL` | `info` | Nível de log (`debug`, `info`, `warn`, `error`) |
+| `HOOKINATOR_MAX_PAYLOAD_SIZE` | `1MB` | Tamanho máximo do payload |
 
-Para executar os testes unitários definidos em [`test/test_hookinator.ml`](test/test_hookinator.ml):
+### 🔧 Configuração
 
-```sh
+#### Exemplo de Payload de Webhook
+
+```json
+{ 
+"event": "payment_success",
+"transaction_id": "abc123",
+"amount": 49.90,
+"currency": "BRL",
+"timestamp": "2025-05-11T16:00:00Z" 
+}
+```
+
+#### Endpoints Disponíveis
+
+- `POST /webhook` - Receber webhooks
+- `GET /health` - Status do serviço
+- `GET /metrics` - Métricas básicas (opcional)
+
+## 🧪 Testando
+
+### Testes Unitários
+
+```bash
+# Executar todos os testes
 dune test
+
+# Executar com saída verbosa
+dune test --verbose
+
+# Executar testes específicos
+dune exec test/test_hookinator.exe
 ```
 
-### Teste de Webhook (Python)
+### Teste de Integração
 
-O script [`test_webhook.py`](test_webhook.py) pode ser usado para enviar uma requisição de teste para o endpoint do webhook. Certifique-se de que o servidor Hookinator esteja em execução antes de rodar este script.
+O projeto inclui um script Python para testar o endpoint de webhook:
 
-```sh
+```bash
+# Certifique-se de que o servidor está rodando
+dune exec hookinator &
+
+# Execute o teste
 python test_webhook.py
+
+# Parar o servidor
+kill %1
 ```
 
-Você pode precisar ajustar o URL e o payload no script [`test_webhook.py`](test_webhook.py) conforme necessário.
+### Teste Manual com cURL
 
-## Licença
+```bash
+# Testar endpoint de webhook
+curl -X POST http://localhost:3000/webhook \
+  -H "Content-Type: application/json" \
+  -d '{
+    "event": "test.event",
+    "timestamp": "2024-01-15T10:30:00Z",
+    "data": {"test": true}
+  }'
 
-Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+# Verificar saúde do serviço
+curl http://localhost:3000/health
+```
+
+## 📊 Monitoramento
+
+### Logs
+
+O Hookinator utiliza logging estruturado. Os logs incluem:
+- Requisições recebidas
+- Transações processadas
+- Erros de validação
+- Notificações enviadas
+
+### Métricas
+
+O banco de dados SQLite ([`webhook_transactions.db`](webhook_transactions.db)) armazena:
+- Histórico de todas as transações
+- Timestamps de processamento
+- Status de processamento
+- Metadados dos webhooks
+
+## 🔒 Segurança
+
+- Validação de assinatura de webhooks
+- Limitação de tamanho de payload
+- Sanitização de dados de entrada
+- Logs de auditoria completos
+
+## 🤝 Contribuindo
+
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+### Padrões de Código
+
+- Use `dune fmt` para formatação
+- Execute `dune test` antes de commits
+- Siga as convenções de naming do OCaml
+- Documente funções públicas
+
+## 📄 Licença
+
+Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+---
+
+⭐ Se este projeto foi útil, considere dar uma estrela no GitHub!
