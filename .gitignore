@@ -1,0 +1,31 @@
+# OCaml/Dune build artifacts
+_build/
+*.install
+*.opam.locked
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python cache (from test script)
+__pycache__/
+*.pyc
+
+# Environment files
+.env
+.env.local

@@ -1,0 +1,5 @@
+(executable
+ (public_name hookinator)
+ (name main)
+ (libraries hookinator opium)
+ (preprocess (pps lwt_ppx)))

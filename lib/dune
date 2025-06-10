@@ -1,0 +1,12 @@
+(library
+ (public_name hookinator)
+ (name hookinator)
+ (libraries 
+   yojson 
+   opium 
+   lwt 
+   cohttp-lwt-unix 
+   logs 
+   logs.fmt
+   sqlite3)
+ (preprocess (pps lwt_ppx)))
