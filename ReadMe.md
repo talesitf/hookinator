@@ -18,12 +18,13 @@ O projeto simula todo o ciclo de vida de um webhook: recepção via HTTP, valida
 
 ## Arquitetura
 
+O sistema segue uma arquitetura modular baseada em componentes funcionais:
+
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
 │   HTTP Client   │───▶│   Hookinator     │───▶│   Database      │
 │   (Webhook)     │◀———│   Server         │    │   (SQLite)      │
 └─────────────────┘    └──────────────────┘    └─────────────────┘
-
 ```
 
 ## Estrutura do Projeto
@@ -133,11 +134,11 @@ O servidor estará disponível em `http://localhost:3000` (ou na porta especific
 
 ```json
 { 
-"event": "payment_success",
-"transaction_id": "abc123",
-"amount": 49.90,
-"currency": "BRL",
-"timestamp": "2025-05-11T16:00:00Z" 
+  "event": "payment_success",
+  "transaction_id": "abc123",
+  "amount": 49.90,
+  "currency": "BRL",
+  "timestamp": "2025-05-11T16:00:00Z" 
 }
 ```
 
@@ -198,6 +199,7 @@ curl http://localhost:3000/health
 ### Logs
 
 O Hookinator utiliza logging estruturado. Os logs incluem:
+
 - Requisições recebidas
 - Transações processadas
 - Erros de validação
@@ -206,6 +208,7 @@ O Hookinator utiliza logging estruturado. Os logs incluem:
 ### Persistência de Dados
 
 O banco de dados SQLite ([`webhook_transactions.db`](webhook_transactions.db)) armazena:
+
 - Histórico de todas as transações
 - Timestamps de processamento
 - Status de processamento
@@ -218,7 +221,9 @@ O banco de dados SQLite ([`webhook_transactions.db`](webhook_transactions.db)) a
 - Sanitização de dados de entrada
 - Logs de auditoria completos
 
-## Quer contribuir?
+## Contribuição
+
+Contribuições são bem-vindas! Para contribuir:
 
 1. Fork o projeto
 2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
@@ -233,7 +238,7 @@ O banco de dados SQLite ([`webhook_transactions.db`](webhook_transactions.db)) a
 - Siga as convenções de naming do OCaml
 - Documente funções públicas
 
-## 📄 Licença
+## Licença
 
 Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
