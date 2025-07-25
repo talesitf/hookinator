@@ -3,9 +3,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![OCaml](https://img.shields.io/badge/OCaml-5.2+-orange.svg)](https://ocaml.org/)
 
-Hookinator é um serviço de webhook robusto e eficiente escrito em OCaml. Ele recebe webhooks HTTP, processa transações de forma assíncrona e envia notificações, oferecendo uma solução completa para integração de sistemas via webhooks.
+**Hookinator** é um projeto desenvolvido em **OCaml**, utilizando a biblioteca `Lwt` para construir um servidor assíncrono simples de webhooks. Seu objetivo é demonstrar como a **programação funcional** pode ser aplicada para tornar a comunicação via webhooks HTTP mais eficiente e robusta, promovendo boas práticas de desenvolvimento.
 
-## ✨ Funcionalidades
+O projeto simula todo o ciclo de vida de um webhook: recepção via HTTP, validação de payloads, persistência de transações em **SQLite** e envio de notificações baseadas em eventos. Boas práticas de arquitetura funcional, logging estruturado e modularização tornam o Hookinator um exemplo prático de como estruturar sistemas reativos com OCaml, facilitando manutenção e evolução do código.
+
+## Funcionalidades
 
 - 🔄 **Processamento de Webhooks**: Recebe e processa webhooks HTTP de forma assíncrona
 - 💾 **Persistência de Dados**: Armazena transações em banco de dados SQLite para auditoria
@@ -14,7 +16,7 @@ Hookinator é um serviço de webhook robusto e eficiente escrito em OCaml. Ele r
 - 🚀 **Alta Performance**: Construído com Lwt para programação assíncrona eficiente
 - 📊 **Logging Estruturado**: Sistema de logs detalhado para monitoramento e debug
 
-## 🏗️ Arquitetura
+## Arquitetura
 
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
@@ -24,33 +26,33 @@ Hookinator é um serviço de webhook robusto e eficiente escrito em OCaml. Ele r
 
 ```
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 hookinator/
 ├── bin/                    # Executável principal
-│   ├── dune               # Configuração do executável
-│   └── main.ml            # Ponto de entrada da aplicação
-├── lib/                   # Biblioteca principal
-│   ├── database.ml        # Interface com banco de dados SQLite
-│   ├── dune              # Configuração da biblioteca
-│   ├── handlers.ml       # Manipuladores de requisições HTTP
-│   ├── hookinator.ml     # Módulo principal e API pública
-│   ├── notification.ml   # Sistema de notificações
-│   ├── transaction.ml    # Lógica de transações e modelos
-│   ├── types.ml         # Definições de tipos compartilhados
-│   └── validation.ml     # Validação de dados e schemas
-├── test/                 # Testes
-│   ├── dune             # Configuração de testes
-│   └── test_hookinator.ml # Testes unitários
-├── dune-project         # Configuração do projeto Dune
-├── hookinator.opam      # Metadados do pacote OPAM
-├── test_webhook.py      # Script de teste Python
+│   ├── dune                # Configuração do executável
+│   └── main.ml             # Ponto de entrada da aplicação
+├── lib/                    # Biblioteca principal
+│   ├── database.ml         # Interface com banco de dados SQLite
+│   ├── dune                # Configuração da biblioteca
+│   ├── handlers.ml         # Manipuladores de requisições HTTP
+│   ├── hookinator.ml       # Módulo principal e API pública
+│   ├── notification.ml     # Sistema de notificações
+│   ├── transaction.ml      # Lógica de transações e modelos
+│   ├── types.ml            # Definições de tipos compartilhados
+│   └── validation.ml       # Validação de dados e schemas
+├── test/                   # Testes
+│   ├── dune                # Configuração de testes
+│   └── test_hookinator.ml  # Testes unitários
+├── dune-project            # Configuração do projeto Dune
+├── hookinator.opam         # Metadados do pacote OPAM
+├── test_webhook.py         # Script de teste Python
 ├── webhook_transactions.db # Banco de dados SQLite
-└── LICENSE              # Licença MIT
+└── LICENSE                 # Licença MIT
 ```
 
-### 📋 Descrição dos Módulos
+### Descrição dos Módulos
 
 - **[`bin/main.ml`](bin/main.ml)**: Ponto de entrada que inicializa o servidor HTTP
 - **[`lib/hookinator.ml`](lib/hookinator.ml)**: API principal e orquestração dos componentes
@@ -61,7 +63,7 @@ hookinator/
 - **[`lib/validation.ml`](lib/validation.ml)**: Validação de payloads e schemas JSON
 - **[`lib/types.ml`](lib/types.ml)**: Tipos de dados compartilhados entre módulos
 
-## 🚀 Início Rápido
+## Início Rápido
 
 ### Pré-requisitos
 
@@ -74,15 +76,17 @@ hookinator/
 
 As dependências são gerenciadas pelo arquivo [`hookinator.opam`](hookinator.opam).
 
-### 📦 Instalação
+### Instalação
 
 1. **Clone o repositório**:
+
    ```bash
    git clone <repository-url>
    cd hookinator
    ```
 
 2. **Configure o ambiente OCaml**:
+
    ```bash
    # Se necessário, crie um switch local
    opam switch create . 5.2.0
@@ -92,11 +96,12 @@ As dependências são gerenciadas pelo arquivo [`hookinator.opam`](hookinator.op
    ```
 
 3. **Compile o projeto**:
+
    ```bash
    dune build
    ```
 
-### ▶️ Executando
+### Executando
 
 #### Iniciar o Servidor
 
@@ -122,7 +127,7 @@ O servidor estará disponível em `http://localhost:3000` (ou na porta especific
 | `HOOKINATOR_LOG_LEVEL` | `info` | Nível de log (`debug`, `info`, `warn`, `error`) |
 | `HOOKINATOR_MAX_PAYLOAD_SIZE` | `1MB` | Tamanho máximo do payload |
 
-### 🔧 Configuração
+### Configuração
 
 #### Exemplo de Payload de Webhook
 
@@ -142,7 +147,7 @@ O servidor estará disponível em `http://localhost:3000` (ou na porta especific
 - `GET /health` - Status do serviço
 - `GET /metrics` - Métricas básicas (opcional)
 
-## 🧪 Testando
+## Testando
 
 ### Testes Unitários
 
@@ -188,7 +193,7 @@ curl -X POST http://localhost:3000/webhook \
 curl http://localhost:3000/health
 ```
 
-## 📊 Monitoramento
+## Monitoramento
 
 ### Logs
 
@@ -198,7 +203,7 @@ O Hookinator utiliza logging estruturado. Os logs incluem:
 - Erros de validação
 - Notificações enviadas
 
-### Métricas
+### Persistência de Dados
 
 O banco de dados SQLite ([`webhook_transactions.db`](webhook_transactions.db)) armazena:
 - Histórico de todas as transações
@@ -206,14 +211,14 @@ O banco de dados SQLite ([`webhook_transactions.db`](webhook_transactions.db)) a
 - Status de processamento
 - Metadados dos webhooks
 
-## 🔒 Segurança
+## Segurança
 
 - Validação de assinatura de webhooks
 - Limitação de tamanho de payload
 - Sanitização de dados de entrada
 - Logs de auditoria completos
 
-## 🤝 Contribuindo
+## Quer contribuir?
 
 1. Fork o projeto
 2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
@@ -235,3 +240,5 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 ---
 
 ⭐ Se este projeto foi útil, considere dar uma estrela no GitHub!
+
+> O Hookinator foi idealizado como uma demonstração técnica para explorar, de forma aplicada, conceitos aprendidos em sala de aula sobre programação funcional, concorrência assíncrona e arquitetura de sistemas distribuídos.
