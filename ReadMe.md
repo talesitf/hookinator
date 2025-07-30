@@ -1,7 +1,18 @@
 # Hookinator
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![OCaml](https://img.shields.io/badge/OCaml-5.2+-orange.svg)](https://ocaml.org/)
+<!-- Linha 1 — visibilidade geral -->
+![GitHub Repo stars](https://img.shields.io/github/stars/talesitf/hookinator?style=social)
+![GitHub forks](https://img.shields.io/github/forks/talesitf/hookinator?style=social)
+
+<!-- Linha 2 — build, cobertura e licença -->
+![CI](https://github.com/talesitf/hookinator/actions/workflows/ci.yml/badge.svg)
+![Coverage](https://img.shields.io/codecov/c/github/talesitf/hookinator?label=coverage)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+<!-- Linha 3 — tech‑stack e estado -->
+![OCaml 5.2](https://img.shields.io/badge/OCaml-5.2%2B-orange.svg)
+![Lwt](https://img.shields.io/badge/Lwt-async-blueviolet)
+![Last commit](https://img.shields.io/github/last-commit/talesitf/hookinator)
 
 **Hookinator** é um projeto desenvolvido em **OCaml**, utilizando a biblioteca `Lwt` para construir um servidor assíncrono simples de webhooks. Seu objetivo é demonstrar como a **programação funcional** pode ser aplicada para tornar a comunicação via webhooks HTTP mais eficiente e robusta, promovendo boas práticas de desenvolvimento.
 
