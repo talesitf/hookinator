@@ -5,11 +5,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/talesitf/hookinator?style=social)
 
 <!-- Linha 2 — build, cobertura e licença -->
-![CI](https://github.com/talesitf/hookinator/actions/workflows/ci.yml/badge.svg)
-![Coverage](https://img.shields.io/codecov/c/github/talesitf/hookinator?label=coverage)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-
-<!-- Linha 3 — tech‑stack e estado -->
 ![OCaml 5.2](https://img.shields.io/badge/OCaml-5.2%2B-orange.svg)
 ![Lwt](https://img.shields.io/badge/Lwt-async-blueviolet)
 ![Last commit](https://img.shields.io/github/last-commit/talesitf/hookinator)
