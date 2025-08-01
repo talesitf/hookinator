@@ -4,3 +4,4 @@ module Database = Database
 module Notification = Notification
 module Transaction = Transaction
 module Handlers = Handlers
+module Config = Config

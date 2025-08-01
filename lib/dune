@@ -5,8 +5,9 @@
    yojson 
    opium 
    lwt 
+   lwt.unix
    cohttp-lwt-unix 
    logs 
-   logs.fmt
-   sqlite3)
- (preprocess (pps lwt_ppx)))
+   logs.fmt 
+   sqlite3
+   re))

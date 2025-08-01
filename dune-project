@@ -28,7 +28,9 @@
    lwt_ppx
    cohttp-lwt-unix
    logs
-   logs.fmt
-   sqlite3)
+   fmt
+   sqlite3
+   (alcotest :with-test)
+   (alcotest-lwt :with-test))
  (tags
   ("webhook" "payment" "ocaml" "sqlite" "api" "microservice")))
